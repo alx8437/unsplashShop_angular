@@ -16,8 +16,8 @@ export class HomePageComponent implements OnInit {
 
   ngOnInit(): void {
     this.photosService.getPhotos()
-      .subscribe(data => {
-        console.log(data);
+      .subscribe(photo => {
+        console.log(photo);
       });
 
   }
