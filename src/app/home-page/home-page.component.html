@@ -5,6 +5,7 @@
     <div class="bayItem">
       <div class="picture" *ngFor="let p of picture; let idx = index">
         <div class="picture__container" *ngIf="idx < 9">
+          <mat-checkbox color="warn" [checked]="p.checked"></mat-checkbox>
           <img src={{p.urls.small}} alt="#">
         </div>
       </div>
