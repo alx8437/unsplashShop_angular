@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
-import {PhotosService} from '../services/photos.service';
+import {PictureService, Urls} from '../services/picture.service';
 
 
 @Component({
@@ -9,17 +8,22 @@ import {PhotosService} from '../services/photos.service';
   styleUrls: ['./home-page.component.scss']
 })
 export class HomePageComponent implements OnInit {
-  photos = [];
+  picture = [];
 
 
-  constructor(private photosService: PhotosService) { }
+  constructor(private pictureService: PictureService) { }
 
   ngOnInit(): void {
-    this.photosService.getPhotos()
-      .subscribe(photo => {
-        console.log(photo);
+    this.pictureService.getPhotos()
+      .subscribe(picture => {
+        this.picture = picture;
+        console.log(picture);
       });
-
+  }
+  log(): void {
+    this.picture.map(p => {
+      console.log(p.urls.small);
+    });
   }
 
 }
