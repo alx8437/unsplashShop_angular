@@ -1,3 +1,4 @@
+<button (click)="log()">log</button>
 <div class="container">
   <h1>Internet shop wallpapers</h1>
   <div class="wrapper">
@@ -5,7 +6,7 @@
     <div class="bayItem">
       <div class="picture" *ngFor="let p of picture; let idx = index">
         <div class="picture__container" *ngIf="idx < 9">
-          <mat-checkbox color="warn" [checked]="p.checked"></mat-checkbox>
+          <mat-checkbox color="warn" checked="{{p.isChecked}}">{{p.isChecked}}</mat-checkbox>
           <img src={{p.urls.small}} alt="#">
         </div>
       </div>

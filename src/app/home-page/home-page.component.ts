@@ -9,6 +9,7 @@ import {PictureService, Urls} from '../services/picture.service';
 })
 export class HomePageComponent implements OnInit {
   picture = [];
+  isChecked;
 
 
   constructor(private pictureService: PictureService) { }
@@ -17,12 +18,11 @@ export class HomePageComponent implements OnInit {
     this.pictureService.getPhotos()
       .subscribe(picture => {
         this.picture = picture;
-        console.log(picture);
       });
   }
   log(): void {
     this.picture.map(p => {
-      console.log(p.urls.small);
+      console.log(this.picture);
     });
   }
 

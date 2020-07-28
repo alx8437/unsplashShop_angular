@@ -4,18 +4,7 @@ import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {environment} from '../../environments/environment';
 
-export interface PhotoBody {
-  id: string;
-  created_at: Date;
-  updated_at: Date;
-}
 
-
-export interface Photo {
-  id: string;
-  createdAt: Date;
-  updatedAt: Date;
-}
 
 export interface Urls {
   small: string;
@@ -25,6 +14,7 @@ export interface Urls {
 export interface PictureDate {
   id: string;
   urls: Urls;
+  isChecked: boolean;
 }
 
 
@@ -46,7 +36,8 @@ export class PictureService {
         return p.map(picture => {
           return {
             id: picture.id,
-            urls: picture.urls
+            urls: picture.urls,
+            isChecked: false
           };
         });
       })
