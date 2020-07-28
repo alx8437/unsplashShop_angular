@@ -1,1 +1,14 @@
-<button (click)="log()">log</button>
+<div class="container">
+  <h1>Internet shop wallpapers</h1>
+  <div class="wrapper">
+    <div class="parameters"></div>
+    <div class="bayItem">
+      <div class="picture" *ngFor="let p of picture; let idx = index">
+        <div class="picture__container" *ngIf="idx < 9">
+          <img src={{p.urls.small}} alt="#">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
