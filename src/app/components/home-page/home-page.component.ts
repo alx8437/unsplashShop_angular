@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {PictureDate, PictureService, Urls} from '../services/picture.service';
+import {PictureDate, PictureService, Urls} from '../../services/picture.service';
 
 
 @Component({
@@ -9,7 +9,8 @@ import {PictureDate, PictureService, Urls} from '../services/picture.service';
 })
 export class HomePageComponent implements OnInit {
   picture: PictureDate[] = [];
-  checkedItemBay: string[] = [];
+  checkedItem: string[] = [];
+  checkedItemBay: PictureDate[] = [];
 
   constructor(private pictureService: PictureService) {
   }
@@ -28,8 +29,9 @@ export class HomePageComponent implements OnInit {
     });
   }
 
-  changeStatus(id): void {
-    this.checkedItemBay.push(id);
+  changeStatus(pictureItem): void {
+    this.checkedItemBay.push(pictureItem);
     console.log(this.checkedItemBay);
   }
 }
+
