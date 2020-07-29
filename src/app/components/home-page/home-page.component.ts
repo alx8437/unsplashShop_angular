@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {PictureDate, PictureService, Urls} from '../../services/picture.service';
+import {PictureDate, PictureService} from '../../services/picture.service';
 
 
 @Component({

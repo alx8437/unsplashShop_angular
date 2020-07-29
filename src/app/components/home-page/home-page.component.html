@@ -1,6 +1,12 @@
 <!--<button (click)="log()">log</button>-->
 <div class="container">
-  <h1>Internet shop wallpapers</h1>
+  <div class="header">
+    <button mat-raised-button color="primary">Filters</button>
+    <h1>Internet shop wallpapers</h1>
+    <button routerLink="/cart" mat-fab color="primary" aria-label="Example icon button with a delete icon">
+      <mat-icon>delete</mat-icon>
+    </button>
+  </div>
   <div class="wrapper">
     <div class="parameters"></div>
     <div class="bayItem">
@@ -8,7 +14,7 @@
         <div class="picture__container" *ngIf="idx < 9">
 
           <mat-checkbox
-            color="warn"
+            color="primary"
             [(ngModel)]="p.isChecked"
             (change)="changeStatus(p)"
           ></mat-checkbox>

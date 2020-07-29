@@ -6,7 +6,7 @@ import {environment} from '../../environments/environment';
 
 
 
-export interface Urls {
+interface Urls {
   small: string;
   regular: string;
 }

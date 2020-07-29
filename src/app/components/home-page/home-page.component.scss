@@ -1,3 +1,14 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  padding: 5px 0 5px 0;
+  h1 {
+    display: block;
+    margin-top:  10px;
+    font-family: 'Sora', sans-serif;
+  }
+}
+
 .wrapper {
   display: flex;
   justify-content: space-between;
