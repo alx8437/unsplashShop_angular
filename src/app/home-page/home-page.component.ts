@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import {PictureService, Urls} from '../services/picture.service';
+import {Component, OnInit} from '@angular/core';
+import {PictureDate, PictureService, Urls} from '../services/picture.service';
 
 
 @Component({
@@ -9,21 +9,25 @@ import {PictureService, Urls} from '../services/picture.service';
 })
 export class HomePageComponent implements OnInit {
   picture = [];
-  isChecked;
 
-
-  constructor(private pictureService: PictureService) { }
+  constructor(private pictureService: PictureService) {
+  }
 
   ngOnInit(): void {
     this.pictureService.getPhotos()
-      .subscribe(picture => {
+      .subscribe((picture: PictureDate[]) => {
         this.picture = picture;
       });
   }
+
+
   log(): void {
     this.picture.map(p => {
-      console.log(this.picture);
+      console.log(p);
     });
   }
 
+  changeStatus(id): void {
+    console.log(id);
+  }
 }
