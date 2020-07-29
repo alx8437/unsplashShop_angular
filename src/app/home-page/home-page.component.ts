@@ -8,7 +8,8 @@ import {PictureDate, PictureService, Urls} from '../services/picture.service';
   styleUrls: ['./home-page.component.scss']
 })
 export class HomePageComponent implements OnInit {
-  picture = [];
+  picture: PictureDate[] = [];
+  checkedItemBay: string[] = [];
 
   constructor(private pictureService: PictureService) {
   }
@@ -28,6 +29,7 @@ export class HomePageComponent implements OnInit {
   }
 
   changeStatus(id): void {
-    console.log(id);
+    this.checkedItemBay.push(id);
+    console.log(this.checkedItemBay);
   }
 }
