@@ -9,7 +9,6 @@ import {PictureDate, PictureService, Urls} from '../../services/picture.service'
 })
 export class HomePageComponent implements OnInit {
   picture: PictureDate[] = [];
-  checkedItem: string[] = [];
   checkedItemBay: PictureDate[] = [];
 
   constructor(private pictureService: PictureService) {
@@ -31,6 +30,9 @@ export class HomePageComponent implements OnInit {
 
   changeStatus(pictureItem): void {
     this.checkedItemBay.push(pictureItem);
+    this.checkedItemBay = this.checkedItemBay.filter(item => {
+      return item.isChecked === true;
+    });
     console.log(this.checkedItemBay);
   }
 }

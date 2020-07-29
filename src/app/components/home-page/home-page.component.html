@@ -6,10 +6,12 @@
     <div class="bayItem">
       <div class="picture" *ngFor="let p of picture; let idx = index">
         <div class="picture__container" *ngIf="idx < 9">
-          <div class="checkbox" >
 
-          </div>
-          <mat-checkbox  color="warn" (change)="changeStatus(p)" [checked]="p.isChecked"></mat-checkbox>
+          <mat-checkbox
+            color="warn"
+            [(ngModel)]="p.isChecked"
+            (change)="changeStatus(p)"
+          ></mat-checkbox>
           <img src={{p.urls.small}} alt="#">
         </div>
       </div>
