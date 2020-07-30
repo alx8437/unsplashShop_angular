@@ -10,37 +10,53 @@ import {PictureDate, PictureService} from '../../services/picture.service';
 export class HomePageComponent implements OnInit {
   picture: PictureDate[] = [];
   checkedItemBay: PictureDate[] = [];
+  localStorage: PictureDate[] = [];
+  localGet: PictureDate[] = [];
 
   constructor(private pictureService: PictureService) {
   }
 
   ngOnInit(): void {
-    this.pictureService.getPhotos()
-      .subscribe((picture: PictureDate[]) => {
-        this.picture = picture;
-      });
     this.restoreLocalStorage();
-    console.log(this.checkedItemBay);
+    this.setValue();
+  }
+
+  setValue(): void {
+    if (this.localStorage.length === 0) {
+      this.pictureService.getPhotos()
+        .subscribe((picture: PictureDate[]) => {
+          this.picture = picture;
+        });
+    } else {
+      this.pictureService.getPhotos()
+        .subscribe((picture: PictureDate[]) => {
+          this.localGet = picture;
+          for (const el of this.localStorage) {
+            const index = this.localGet.findIndex(item => item.id === el.id);
+            this.localGet[index].isChecked = true;
+            this.picture = this.localGet;
+          }
+        });
+    }
   }
 
 
   log(): void {
-    // this.picture.map(p => {
-    //   console.log(p);
-    // });
+    console.log(this.localStorage);
+    console.log(this.localGet);
   }
 
   restoreLocalStorage = () => {
     const stateAsString = localStorage.getItem('itemForBay');
     if (stateAsString !== null) {
-      this.checkedItemBay = JSON.parse(stateAsString);
+      this.localStorage = JSON.parse(stateAsString);
     }
-  }
+  };
 
   saveLocalStorage = () => {
     const stateAsString = JSON.stringify(this.checkedItemBay);
     localStorage.setItem('itemForBay', stateAsString);
-  }
+  };
 
   changeStatus(pictureItem): void {
     this.checkedItemBay.push(pictureItem);
