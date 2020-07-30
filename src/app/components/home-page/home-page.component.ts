@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {PictureDate, PictureService} from '../../services/picture.service';
+import {StateService} from '../../services/state.service';
 
 
 @Component({
@@ -11,7 +12,8 @@ export class HomePageComponent implements OnInit {
   picture: PictureDate[] = [];
   checkedItemBay: PictureDate[] = [];
 
-  constructor(private pictureService: PictureService) {
+  constructor(private pictureService: PictureService,
+              private stateService: StateService) {
   }
 
   ngOnInit(): void {
@@ -33,7 +35,8 @@ export class HomePageComponent implements OnInit {
     this.checkedItemBay = this.checkedItemBay.filter(item => {
       return item.isChecked === true;
     });
-    console.log(this.checkedItemBay);
+    // console.log(this.checkedItemBay);
+    this.stateService.picturesState.next(this.checkedItemBay);
   }
 }
 
