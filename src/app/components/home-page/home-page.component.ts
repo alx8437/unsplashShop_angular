@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {PictureDate, PictureService} from '../../services/picture.service';
-import {StateService} from '../../services/state.service';
 
 
 @Component({
@@ -12,8 +11,7 @@ export class HomePageComponent implements OnInit {
   picture: PictureDate[] = [];
   checkedItemBay: PictureDate[] = [];
 
-  constructor(private pictureService: PictureService,
-              private stateService: StateService) {
+  constructor(private pictureService: PictureService) {
   }
 
   ngOnInit(): void {
@@ -21,13 +19,27 @@ export class HomePageComponent implements OnInit {
       .subscribe((picture: PictureDate[]) => {
         this.picture = picture;
       });
+    this.restoreLocalStorage();
+    console.log(this.checkedItemBay);
   }
 
 
   log(): void {
-    this.picture.map(p => {
-      console.log(p);
-    });
+    // this.picture.map(p => {
+    //   console.log(p);
+    // });
+  }
+
+  restoreLocalStorage = () => {
+    const stateAsString = localStorage.getItem('itemForBay');
+    if (stateAsString !== null) {
+      this.checkedItemBay = JSON.parse(stateAsString);
+    }
+  }
+
+  saveLocalStorage = () => {
+    const stateAsString = JSON.stringify(this.checkedItemBay);
+    localStorage.setItem('itemForBay', stateAsString);
   }
 
   changeStatus(pictureItem): void {
@@ -35,8 +47,8 @@ export class HomePageComponent implements OnInit {
     this.checkedItemBay = this.checkedItemBay.filter(item => {
       return item.isChecked === true;
     });
-    // console.log(this.checkedItemBay);
-    this.stateService.setPictureItems(this.checkedItemBay);
+    console.log(this.checkedItemBay);
+    this.saveLocalStorage();
   }
 }
 
