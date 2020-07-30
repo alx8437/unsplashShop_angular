@@ -11,4 +11,8 @@ export class StateService {
 
   constructor() {
   }
+
+  setPictureItems(value): void {
+    this.picturesState.next(value);
+  }
 }

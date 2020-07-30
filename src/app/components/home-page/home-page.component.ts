@@ -36,7 +36,7 @@ export class HomePageComponent implements OnInit {
       return item.isChecked === true;
     });
     // console.log(this.checkedItemBay);
-    this.stateService.picturesState.next(this.checkedItemBay);
+    this.stateService.setPictureItems(this.checkedItemBay);
   }
 }
 
