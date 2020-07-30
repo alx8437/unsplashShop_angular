@@ -1,8 +1,10 @@
-<button (click)="log()">log</button>
-<!--<div class="bayItem">-->
-  <!--<div class="picture">-->
-    <!--<div class="picture__container">-->
-      <!--<img src="#" alt="#">-->
-    <!--</div>-->
-  <!--</div>-->
-<!--</div>-->
+<div class="container">
+  <button (click)="log()">log</button>
+  <div class="bayItem">
+    <div class="picture" *ngFor="let itemBay of shopItemsBay">
+      <div class="picture__container">
+        <img src={{itemBay.urls.small}} alt="#">
+      </div>
+    </div>
+  </div>
+</div>

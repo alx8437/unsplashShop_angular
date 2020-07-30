@@ -8,7 +8,7 @@ import { PictureDate } from '../../services/picture.service';
 })
 export class ShoppingCartComponent implements OnInit {
 
-  shopItemBay: PictureDate[] = [];
+  shopItemsBay: PictureDate[] = [];
 
   constructor() {
   }
@@ -16,7 +16,7 @@ export class ShoppingCartComponent implements OnInit {
   restoreLocalStorage = () => {
     const stateAsString = localStorage.getItem('itemForBay');
     if (stateAsString !== null) {
-      this.shopItemBay = JSON.parse(stateAsString);
+      this.shopItemsBay = JSON.parse(stateAsString);
     }
     }
 
@@ -29,7 +29,7 @@ export class ShoppingCartComponent implements OnInit {
 
 
   log(): void {
-    console.log(this.shopItemBay);
+    console.log(this.shopItemsBay);
   }
 
 }
