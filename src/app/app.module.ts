@@ -9,13 +9,16 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MaterialModule} from './material.module';
 import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.component';
 import { SearchFormComponent } from './components/search-form/search-form.component';
+import { FactScrollerComponent} from './components/fact-scroller/fact-scroller.component';
+import { ScrollingModule} from '@angular/cdk/scrolling';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomePageComponent,
     ShoppingCartComponent,
-    SearchFormComponent
+    SearchFormComponent,
+    FactScrollerComponent,
   ],
   imports: [
     BrowserModule,
@@ -23,7 +26,8 @@ import { SearchFormComponent } from './components/search-form/search-form.compon
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    MaterialModule
+    MaterialModule,
+    ScrollingModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
