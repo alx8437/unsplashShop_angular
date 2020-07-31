@@ -35,6 +35,9 @@ export class HomePageComponent implements OnInit {
             const index = this.localGet.findIndex(item => item.id === el.id);
             this.localGet[index].isChecked = true;
             this.picture = this.localGet;
+            this.checkedItemBay = this.localGet.filter(x => {
+              return x.isChecked === true;
+            });
           }
         });
     }
