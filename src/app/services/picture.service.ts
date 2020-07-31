@@ -15,6 +15,8 @@ export interface PictureDate {
   id: string;
   urls: Urls;
   isChecked: boolean;
+  width: number;
+  height: number;
 }
 
 
@@ -37,7 +39,9 @@ export class PictureService {
           return {
             id: picture.id,
             urls: picture.urls,
-            isChecked: false
+            isChecked: false,
+            width: picture.width,
+            height: picture.height
           };
         });
       })

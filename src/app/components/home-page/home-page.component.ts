@@ -66,7 +66,6 @@ export class HomePageComponent implements OnInit {
     this.checkedItemBay = this.checkedItemBay.filter(item => {
       return item.isChecked === true;
     });
-    console.log(this.checkedItemBay);
     this.saveLocalStorage();
   }
 }

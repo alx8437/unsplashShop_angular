@@ -1,12 +1,12 @@
 <div class="container">
-
-  <button (click)="log()">log</button>
+  <!--<button (click)="log()">log</button>-->
 
   <div class="header">
     <button mat-raised-button color="primary">Filters</button>
     <h1>Internet shop wallpapers</h1>
-    <button routerLink="/cart" mat-fab color="primary" aria-label="Example icon button with a delete icon">
+    <button class="cart" routerLink="/cart" mat-fab color="primary">
       <mat-icon>delete</mat-icon>
+      <span *ngIf="checkedItemBay.length > 0" matBadgeColor="accent" matBadge="{{checkedItemBay.length}}" matBadgeOverlap="false"></span>
     </button>
   </div>
   <div class="wrapper">
@@ -14,7 +14,9 @@
     <div class="bayItem">
       <div class="picture" *ngFor="let p of picture; let idx = index">
         <div class="picture__container" *ngIf="idx < 9">
-
+          <div class="price">
+            <p>{{p.width  |  currency:'USD':'symbol-narrow':'1.0-0'}}</p>
+          </div>
           <mat-checkbox
             color="primary"
             [(ngModel)]="p.isChecked"
