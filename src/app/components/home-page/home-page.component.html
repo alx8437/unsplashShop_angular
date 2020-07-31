@@ -1,6 +1,5 @@
 <div class="container">
   <!--<button (click)="log()">log</button>-->
-
   <div class="header">
     <button mat-raised-button color="primary">Filters</button>
     <h1>Internet shop wallpapers</h1>
@@ -9,6 +8,7 @@
       <span *ngIf="checkedItemBay.length > 0" matBadgeColor="accent" matBadge="{{checkedItemBay.length}}" matBadgeOverlap="false"></span>
     </button>
   </div>
+  <app-search-form></app-search-form>
   <div class="wrapper">
     <div class="parameters"></div>
     <div class="bayItem">

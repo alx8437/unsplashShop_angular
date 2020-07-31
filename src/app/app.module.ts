@@ -8,12 +8,14 @@ import {HttpClientModule} from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MaterialModule} from './material.module';
 import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.component';
+import { SearchFormComponent } from './components/search-form/search-form.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomePageComponent,
-    ShoppingCartComponent
+    ShoppingCartComponent,
+    SearchFormComponent
   ],
   imports: [
     BrowserModule,
