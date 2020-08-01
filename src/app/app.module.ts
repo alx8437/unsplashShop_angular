@@ -10,7 +10,6 @@ import {MaterialModule} from './material.module';
 import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.component';
 import { SearchFormComponent } from './components/search-form/search-form.component';
 import { FactScrollerComponent} from './components/fact-scroller/fact-scroller.component';
-import { ScrollingModule} from '@angular/cdk/scrolling';
 
 @NgModule({
   declarations: [
@@ -27,7 +26,6 @@ import { ScrollingModule} from '@angular/cdk/scrolling';
     HttpClientModule,
     BrowserAnimationsModule,
     MaterialModule,
-    ScrollingModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
