@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {PictureService} from '../../services/picture.service';
 import {PictureDate} from '../../interfaces/Interfaces';
+import {SearchService} from '../../services/search.service';
 
 
 @Component({
@@ -14,7 +15,10 @@ export class HomePageComponent implements OnInit {
   localStorage: PictureDate[] = [];
   localGet: PictureDate[] = [];
 
-  constructor(private pictureService: PictureService) {
+  constructor(
+    private pictureService: PictureService,
+    private searchService: SearchService
+  ) {
   }
 
   ngOnInit(): void {
@@ -71,14 +75,15 @@ export class HomePageComponent implements OnInit {
   }
 
   onScroll(): void {
-    console.log('Scrolled!');
     this.pictureService.paramList.page += 1;
     this.pictureService.getPhotos()
       .subscribe((p) => {
-        console.log(p);
         this.picture.push(...p);
-        console.log(this.picture);
       });
+  }
+
+  changeSearch(): void {
+
   }
 }
 

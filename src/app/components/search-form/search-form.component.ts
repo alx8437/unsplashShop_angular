@@ -1,7 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {PictureService} from '../../services/picture.service';
 import {FormControl} from '@angular/forms';
-import {debounceTime, filter} from 'rxjs/operators';
+import {debounceTime, distinctUntilChanged} from 'rxjs/operators';
+import {SearchService} from '../../services/search.service';
+import {PictureService} from '../../services/picture.service';
 
 @Component({
   selector: 'app-search-form',
@@ -10,33 +11,30 @@ import {debounceTime, filter} from 'rxjs/operators';
 })
 export class SearchFormComponent implements OnInit {
 
+
   searchStr: FormControl = new FormControl('');
 
-  constructor(
-    private pictureService: PictureService
-  ) {
+  constructor(private searchService: SearchService,
+              private pictureService: PictureService) {
   }
 
   ngOnInit(): void {
-    this.searchStr.valueChanges.pipe(
-      debounceTime(400),
-    ).subscribe(data => {
-      console.log(data);
-    });
-
+    this.getSearch();
   }
 
   log(): void {
-    // console.log(this.query);
-    // console.log(typeof(this.query));
-
   }
 
   getSearch(): void {
-    // this.pictureService.paramList.query = this.query;
-    // this.pictureService.getPhotos()
-    //   .subscribe(pictures => {
-    //   });
+    this.searchStr.valueChanges.pipe(
+      debounceTime(400),
+      distinctUntilChanged(),
+    ).subscribe(data => {
+      this.pictureService.paramList.query = data;
+      console.log(data);
+      this.searchService.searchQuery.next(data);
+    });
+
   }
 
 }

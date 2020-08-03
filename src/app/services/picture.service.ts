@@ -17,7 +17,9 @@ export class PictureService {
     query: '',
   };
 
-  constructor(private http: HttpClient) {
+  constructor(
+    private http: HttpClient,
+  ) {
   }
 
   getPhotos(): Observable<PictureDate[]> {
