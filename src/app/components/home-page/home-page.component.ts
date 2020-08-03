@@ -24,6 +24,14 @@ export class HomePageComponent implements OnInit {
   ngOnInit(): void {
     this.restoreLocalStorage();
     this.setValue();
+    this.searchService.searchQuery$
+      .subscribe(data => {
+        this.pictureService.paramList.query = data;
+        this.pictureService.getPhotos()
+          .subscribe(picture => {
+            this.picture = picture;
+          })
+      })
   }
 
   setValue(): void {
@@ -50,8 +58,7 @@ export class HomePageComponent implements OnInit {
 
 
   log(): void {
-    console.log(this.localStorage);
-    console.log(this.localGet);
+    console.log(this.pictureService.paramList.query);
   }
 
   restoreLocalStorage(): void {

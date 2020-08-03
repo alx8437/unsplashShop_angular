@@ -6,7 +6,11 @@ import {BehaviorSubject} from 'rxjs';
 })
 export class SearchService {
 
-  searchQuery: BehaviorSubject<string> = new BehaviorSubject('');
+  searchQuery$: BehaviorSubject<string> = new BehaviorSubject('');
 
   constructor() { }
+
+  setSearch(query): void {
+    this.searchQuery$.next(query)
+  }
 }

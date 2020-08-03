@@ -27,12 +27,12 @@ export class SearchFormComponent implements OnInit {
 
   getSearch(): void {
     this.searchStr.valueChanges.pipe(
-      debounceTime(400),
+      debounceTime(1000),
       distinctUntilChanged(),
     ).subscribe(data => {
       this.pictureService.paramList.query = data;
       console.log(data);
-      this.searchService.searchQuery.next(data);
+      this.searchService.setSearch(data);
     });
 
   }
