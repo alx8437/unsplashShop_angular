@@ -1,6 +1,4 @@
 <button (click)="log()">Log</button>
-<cdk-virtual-scroll-viewport itemSize="100" class="container">
-  <div *cdkVirtualFor="let p of dataPicture" class="number">
-    <img class="img" src={{p.urls.small}} alt="#">
-  </div>
-</cdk-virtual-scroll-viewport>
+<div class="container" *ngFor="let p of dataPicture">
+  <img src={{p.urls.small}} alt="">
+</div>

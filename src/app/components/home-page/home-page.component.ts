@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {PictureDate, PictureService} from '../../services/picture.service';
+import {PictureService} from '../../services/picture.service';
+import {PictureDate} from '../../interfaces/Interfaces';
 
 
 @Component({

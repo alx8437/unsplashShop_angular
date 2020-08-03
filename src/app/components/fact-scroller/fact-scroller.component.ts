@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {PictureDate, PictureService} from "../../services/picture.service";
+import {PictureDate} from '../../interfaces/Interfaces';
+import {PictureService} from '../../services/picture.service';
 
 @Component({
   selector: 'app-fact-scroller',
@@ -11,15 +12,15 @@ export class FactScrollerComponent implements OnInit{
 
   constructor(private pictureServices: PictureService) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.pictureServices.getPhotos()
       .subscribe((p) => {
         this.dataPicture = p;
-      })
+      });
   }
 
-  log() {
-    console.log(this.dataPicture)
+  log(): void {
+    console.log(this.dataPicture);
   }
 
 }
