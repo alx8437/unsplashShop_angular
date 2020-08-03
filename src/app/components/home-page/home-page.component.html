@@ -11,9 +11,15 @@
   <app-search-form></app-search-form>
   <div class="wrapper">
     <div class="parameters"></div>
-    <div class="bayItem">
-      <div class="picture" *ngFor="let p of picture; let idx = index">
-        <div class="picture__container" *ngIf="idx < 9">
+    <div class="bayItem"
+         infiniteScroll
+         [infiniteScrollDistance]="2"
+         [infiniteScrollThrottle]="50"
+         [fromRoot]="true"
+         (scrolled)="onScroll()"
+    >
+      <div class="picture" *ngFor="let p of picture">
+        <div class="picture__container">
           <div class="price">
             <p>{{p.width  |  currency:'USD':'symbol-narrow':'1.0-0'}}</p>
           </div>

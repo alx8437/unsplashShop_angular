@@ -69,5 +69,16 @@ export class HomePageComponent implements OnInit {
     });
     this.saveLocalStorage();
   }
+
+  onScroll(): void {
+    console.log('Scrolled!');
+    this.pictureService.paramList.page += 1;
+    this.pictureService.getPhotos()
+      .subscribe((p) => {
+        console.log(p);
+        this.picture.push(...p);
+        console.log(this.picture);
+      });
+  }
 }
 

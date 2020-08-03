@@ -23,4 +23,13 @@ export class FactScrollerComponent implements OnInit{
     console.log(this.dataPicture);
   }
 
+  onScroll(): void {
+    console.log('Scrolled!')
+    this.pictureServices.paramList.page += 1;
+    this.pictureServices.getPhotos()
+      .subscribe((p) => {
+        this.dataPicture = p;
+      });
+  }
+
 }

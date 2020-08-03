@@ -10,6 +10,7 @@ import {MaterialModule} from './material.module';
 import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.component';
 import { SearchFormComponent } from './components/search-form/search-form.component';
 import { FactScrollerComponent} from './components/fact-scroller/fact-scroller.component';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { FactScrollerComponent} from './components/fact-scroller/fact-scroller.c
     HttpClientModule,
     BrowserAnimationsModule,
     MaterialModule,
+    InfiniteScrollModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

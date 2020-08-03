@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { PictureDate } from '../../services/picture.service';
+import {PictureDate} from '../../interfaces/Interfaces';
 
 @Component({
   selector: 'app-shopping-cart',

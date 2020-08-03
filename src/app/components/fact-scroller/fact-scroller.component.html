@@ -1,4 +1,9 @@
 <button (click)="log()">Log</button>
-<div class="container" *ngFor="let p of dataPicture">
+<div class="container" *ngFor="let p of dataPicture"
+     infiniteScroll
+     [infiniteScrollDistance]="2"
+     [infiniteScrollThrottle]="50"
+     (scrolled)="onScroll()"
+>
   <img src={{p.urls.small}} alt="">
 </div>
