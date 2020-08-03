@@ -50,17 +50,17 @@ export class HomePageComponent implements OnInit {
     console.log(this.localGet);
   }
 
-  restoreLocalStorage = () => {
+  restoreLocalStorage(): void {
     const stateAsString = localStorage.getItem('itemForBay');
     if (stateAsString !== null) {
       this.localStorage = JSON.parse(stateAsString);
     }
-  };
+  }
 
-  saveLocalStorage = () => {
+  saveLocalStorage(): void {
     const stateAsString = JSON.stringify(this.checkedItemBay);
     localStorage.setItem('itemForBay', stateAsString);
-  };
+  }
 
   changeStatus(pictureItem): void {
     this.checkedItemBay.push(pictureItem);

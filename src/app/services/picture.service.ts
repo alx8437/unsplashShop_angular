@@ -13,7 +13,8 @@ import {ParamListPictures, PictureDate} from '../interfaces/Interfaces';
 export class PictureService {
   paramList: ParamListPictures = {
     page: 1,
-    per_page: 10
+    per_page: 9,
+    query: '',
   };
 
   constructor(private http: HttpClient) {
@@ -23,7 +24,8 @@ export class PictureService {
     const httpParam = new HttpParams()
       .append('client_id', 'k_uAJlDjzQOJ1wE47nT83aMH6z-tj0_JsoTt9jzVbZI')
       .append('page', this.paramList.page.toString())
-      .append('per_page', this.paramList.per_page.toString());
+      .append('per_page', this.paramList.per_page.toString())
+      .append('query', this.paramList.query)
     const url = `${environment.apiUrl}/photos`;
     return this.http.get<PictureDate[]>(url, {params: httpParam}).pipe(
       map(p => {
