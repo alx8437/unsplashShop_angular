@@ -27,11 +27,8 @@ export class HomePageComponent implements OnInit {
     this.searchService.searchQuery$
       .subscribe(data => {
         this.pictureService.paramList.query = data;
-        this.pictureService.getPhotos()
-          .subscribe(picture => {
-            this.picture = picture;
-          })
-      })
+        this.setValue();
+      });
   }
 
   setValue(): void {
