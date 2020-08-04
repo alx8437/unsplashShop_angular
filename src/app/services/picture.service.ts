@@ -30,6 +30,7 @@ export class PictureService {
     const url = `${environment.apiUrl}/photos`;
     return this.http.get<PictureDate[]>(url, {params: httpParam}).pipe(
       map(p => {
+        console.log(p)
         return p.map(picture => {
           return {
             id: picture.id,

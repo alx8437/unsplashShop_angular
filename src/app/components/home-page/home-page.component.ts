@@ -22,17 +22,17 @@ export class HomePageComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // this.restoreLocalStorage();
-    // this.setValue();
-    this.searchService.searchQuery$
-      .subscribe(data => {
-        this.pictureService.paramList.query = data;
-        this.pictureService.getPhotoSearch()
-          .subscribe(p => {
-            console.log(p)
-            this.picture = p;
-          });
-      });
+    this.restoreLocalStorage();
+    this.setValue();
+    // this.searchService.searchQuery$
+    //   .subscribe(data => {
+    //     this.pictureService.paramList.query = data;
+    //     this.pictureService.getPhotoSearch()
+    //       .subscribe(p => {
+    //         console.log(p)
+    //         this.picture = p;
+    //       });
+    //   });
   }
 
   setValue(): void {
