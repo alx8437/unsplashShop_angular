@@ -87,13 +87,15 @@ export class HomePageComponent implements OnInit {
 
   onScroll(): void {
     this.pictureService.paramList.page += 1;
-    console.log(this.pictureService.paramList.query)
+    console.log(this.pictureService.paramList.page)
     if (this.pictureService.paramList.query !== '') {
       this.pictureService.getPhotoSearch()
         .subscribe(p => {
-          this.picture = p;
+          console.log(p)
+          this.picture.push(...p);
         });
     } else {
+      console.log(this.pictureService.paramList.page)
       this.pictureService.getPhotosList()
         .subscribe((p) => {
           this.picture.push(...p);
