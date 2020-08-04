@@ -16,3 +16,9 @@ export interface ParamListPictures {
   per_page: number;
   query: string;
 }
+
+export interface GetSearch {
+  results: PictureDate[];
+  total_pages: number;
+  total: number;
+}

@@ -3,7 +3,7 @@ import {HttpClient, HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {environment} from '../../environments/environment';
-import {ParamListPictures, PictureDate} from '../interfaces/Interfaces';
+import {GetSearch, ParamListPictures, PictureDate} from '../interfaces/Interfaces';
 
 
 @Injectable({
@@ -22,12 +22,11 @@ export class PictureService {
   ) {
   }
 
-  getPhotos(): Observable<PictureDate[]> {
+  getPhotosList(): Observable<PictureDate[]> {
     const httpParam = new HttpParams()
       .append('client_id', 'k_uAJlDjzQOJ1wE47nT83aMH6z-tj0_JsoTt9jzVbZI')
       .append('page', this.paramList.page.toString())
-      .append('per_page', this.paramList.per_page.toString())
-      .append('query', this.paramList.query)
+      .append('per_page', this.paramList.per_page.toString());
     const url = `${environment.apiUrl}/photos`;
     return this.http.get<PictureDate[]>(url, {params: httpParam}).pipe(
       map(p => {
@@ -43,4 +42,27 @@ export class PictureService {
       })
     );
   }
+
+  getPhotoSearch(): Observable<PictureDate[]> {
+    const httpParam = new HttpParams()
+      .append('client_id', 'k_uAJlDjzQOJ1wE47nT83aMH6z-tj0_JsoTt9jzVbZI')
+      .append('page', this.paramList.page.toString())
+      .append('per_page', this.paramList.per_page.toString())
+      .append('query', this.paramList.query);
+    const url = `${environment.apiUrl}/search/photos`;
+    return this.http.get<GetSearch>(url, {params: httpParam}).pipe(
+      map(p => {
+        return p.results.map(picture => {
+          return {
+            id: picture.id,
+            urls: picture.urls,
+            isChecked: false,
+            width: picture.width,
+            height: picture.height
+          };
+        });
+      })
+    );
+  }
+
 }

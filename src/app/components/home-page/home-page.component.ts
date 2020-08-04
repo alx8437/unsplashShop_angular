@@ -22,23 +22,27 @@ export class HomePageComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.restoreLocalStorage();
-    this.setValue();
+    // this.restoreLocalStorage();
+    // this.setValue();
     this.searchService.searchQuery$
       .subscribe(data => {
         this.pictureService.paramList.query = data;
-        this.setValue();
+        this.pictureService.getPhotoSearch()
+          .subscribe(p => {
+            console.log(p)
+            this.picture = p;
+          });
       });
   }
 
   setValue(): void {
     if (this.localStorage.length === 0) {
-      this.pictureService.getPhotos()
+      this.pictureService.getPhotosList()
         .subscribe((picture: PictureDate[]) => {
           this.picture = picture;
         });
     } else {
-      this.pictureService.getPhotos()
+      this.pictureService.getPhotosList()
         .subscribe((picture: PictureDate[]) => {
           this.localGet = picture;
           for (const el of this.localStorage) {
@@ -56,6 +60,7 @@ export class HomePageComponent implements OnInit {
 
   log(): void {
     console.log(this.pictureService.paramList.query);
+    this.pictureService.getPhotoSearch();
   }
 
   restoreLocalStorage(): void {
@@ -80,14 +85,11 @@ export class HomePageComponent implements OnInit {
 
   onScroll(): void {
     this.pictureService.paramList.page += 1;
-    this.pictureService.getPhotos()
+    this.pictureService.getPhotosList()
       .subscribe((p) => {
         this.picture.push(...p);
       });
   }
 
-  changeSearch(): void {
-
-  }
 }
 

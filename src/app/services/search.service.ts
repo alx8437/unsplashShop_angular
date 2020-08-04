@@ -11,6 +11,6 @@ export class SearchService {
   constructor() { }
 
   setSearch(query): void {
-    this.searchQuery$.next(query)
+    this.searchQuery$.next(query);
   }
 }
