@@ -24,15 +24,16 @@ export class HomePageComponent implements OnInit {
   ngOnInit(): void {
     this.restoreLocalStorage();
     this.setValue();
-    // this.searchService.searchQuery$
-    //   .subscribe(data => {
-    //     this.pictureService.paramList.query = data;
-    //     this.pictureService.getPhotoSearch()
-    //       .subscribe(p => {
-    //         console.log(p)
-    //         this.picture = p;
-    //       });
-    //   });
+    this.searchService.searchQuery$
+      .subscribe(data => {
+        this.pictureService.paramList.query = data;
+        this.pictureService.getPhotoSearch()
+          .subscribe(p => {
+            if (p.length !== 0) {
+              this.picture = p;
+            }
+          });
+      });
   }
 
   setValue(): void {
@@ -59,8 +60,7 @@ export class HomePageComponent implements OnInit {
 
 
   log(): void {
-    console.log(this.pictureService.paramList.query);
-    this.pictureService.getPhotoSearch();
+    console.log(this.picture);
   }
 
   restoreLocalStorage(): void {
