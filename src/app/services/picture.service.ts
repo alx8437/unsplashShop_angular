@@ -52,6 +52,7 @@ export class PictureService {
     const url = `${environment.apiUrl}/search/photos`;
     return this.http.get<GetSearch>(url, {params: httpParam}).pipe(
       map(p => {
+        console.log(p)
         return p.results.map(picture => {
           return {
             id: picture.id,

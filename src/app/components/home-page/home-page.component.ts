@@ -31,6 +31,8 @@ export class HomePageComponent implements OnInit {
           .subscribe(p => {
             if (p.length !== 0) {
               this.picture = p;
+            } else if (p.length === 0){
+              this.setValue();
             }
           });
       });
@@ -85,10 +87,19 @@ export class HomePageComponent implements OnInit {
 
   onScroll(): void {
     this.pictureService.paramList.page += 1;
-    this.pictureService.getPhotosList()
-      .subscribe((p) => {
-        this.picture.push(...p);
-      });
+    console.log(this.pictureService.paramList.query)
+    if (this.pictureService.paramList.query !== '') {
+      this.pictureService.getPhotoSearch()
+        .subscribe(p => {
+          this.picture = p;
+        });
+    } else {
+      this.pictureService.getPhotosList()
+        .subscribe((p) => {
+          this.picture.push(...p);
+        });
+    }
+
   }
 
 }
