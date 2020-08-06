@@ -17,6 +17,11 @@ export class PictureService {
     query: '',
   };
 
+  httpParam = new HttpParams()
+    .append('client_id', 'k_uAJlDjzQOJ1wE47nT83aMH6z-tj0_JsoTt9jzVbZI')
+    .append('page', this.paramList.page.toString())
+    .append('per_page', this.paramList.per_page.toString())
+
   constructor(
     private http: HttpClient,
   ) {
@@ -44,13 +49,8 @@ export class PictureService {
   }
 
   getPhotoSearch(): Observable<PictureDate[]> {
-    const httpParam = new HttpParams()
-      .append('client_id', 'k_uAJlDjzQOJ1wE47nT83aMH6z-tj0_JsoTt9jzVbZI')
-      .append('page', this.paramList.page.toString())
-      .append('per_page', this.paramList.per_page.toString())
-      .append('query', this.paramList.query);
     const url = `${environment.apiUrl}/search/photos`;
-    return this.http.get<GetSearch>(url, {params: httpParam}).pipe(
+    return this.http.get<GetSearch>(url, {params: this.httpParam}).pipe(
       map(p => {
         console.log(p)
         return p.results.map(picture => {

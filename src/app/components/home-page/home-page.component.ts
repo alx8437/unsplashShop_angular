@@ -26,15 +26,19 @@ export class HomePageComponent implements OnInit {
     this.setValue();
     this.searchService.searchQuery$
       .subscribe(data => {
-        this.pictureService.paramList.query = data;
-        this.pictureService.getPhotoSearch()
-          .subscribe(p => {
-            if (p.length !== 0) {
-              this.picture = p;
-            } else if (p.length === 0){
-              this.setValue();
-            }
-          });
+        if (data !== '') {
+          this.pictureService.paramList.query = data;
+          this.pictureService.httpParam = this.pictureService.httpParam.set('query', data);
+          console.log(this.pictureService.httpParam);
+          this.pictureService.getPhotoSearch()
+            .subscribe(p => {
+              if (p.length !== 0) {
+                this.picture = p;
+              } else if (p.length === 0) {
+                this.setValue();
+              }
+            });
+        }
       });
   }
 
@@ -62,7 +66,7 @@ export class HomePageComponent implements OnInit {
 
 
   log(): void {
-    console.log(this.picture);
+    console.log(this.pictureService.paramList);
   }
 
   restoreLocalStorage(): void {
@@ -87,15 +91,16 @@ export class HomePageComponent implements OnInit {
 
   onScroll(): void {
     this.pictureService.paramList.page += 1;
-    console.log(this.pictureService.paramList.page)
+    console.log(this.pictureService.paramList.page);
     if (this.pictureService.paramList.query !== '') {
       this.pictureService.getPhotoSearch()
         .subscribe(p => {
-          console.log(p)
+          console.log(p);
           this.picture.push(...p);
+          console.log(this.picture);
         });
     } else {
-      console.log(this.pictureService.paramList.page)
+      console.log(this.pictureService.paramList.page);
       this.pictureService.getPhotosList()
         .subscribe((p) => {
           this.picture.push(...p);
