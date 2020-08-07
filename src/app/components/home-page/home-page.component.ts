@@ -93,6 +93,8 @@ export class HomePageComponent implements OnInit {
     this.pictureService.paramList.page += 1;
     console.log(this.pictureService.paramList.page);
     if (this.pictureService.paramList.query !== '') {
+      this.pictureService.httpParam = this.pictureService.httpParam.set('page', this.pictureService.paramList.page.toString())
+      console.log(this.pictureService.httpParam)
       this.pictureService.getPhotoSearch()
         .subscribe(p => {
           console.log(p);
@@ -100,7 +102,6 @@ export class HomePageComponent implements OnInit {
           console.log(this.picture);
         });
     } else {
-      console.log(this.pictureService.paramList.page);
       this.pictureService.getPhotosList()
         .subscribe((p) => {
           this.picture.push(...p);

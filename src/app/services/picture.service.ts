@@ -18,9 +18,9 @@ export class PictureService {
   };
 
   httpParam = new HttpParams()
-    .append('client_id', 'k_uAJlDjzQOJ1wE47nT83aMH6z-tj0_JsoTt9jzVbZI')
-    .append('page', this.paramList.page.toString())
-    .append('per_page', this.paramList.per_page.toString())
+    .set('client_id', 'k_uAJlDjzQOJ1wE47nT83aMH6z-tj0_JsoTt9jzVbZI')
+    .set('page', this.paramList.page.toString())
+    .set('per_page', this.paramList.per_page.toString())
 
   constructor(
     private http: HttpClient,
@@ -29,9 +29,10 @@ export class PictureService {
 
   getPhotosList(): Observable<PictureDate[]> {
     const httpParam = new HttpParams()
-      .append('client_id', 'k_uAJlDjzQOJ1wE47nT83aMH6z-tj0_JsoTt9jzVbZI')
-      .append('page', this.paramList.page.toString())
-      .append('per_page', this.paramList.per_page.toString());
+      .set('client_id', 'k_uAJlDjzQOJ1wE47nT83aMH6z-tj0_JsoTt9jzVbZI')
+      .set('page', this.paramList.page.toString())
+      .set('per_page', this.paramList.per_page.toString());
+    console.log(httpParam)
     const url = `${environment.apiUrl}/photos`;
     return this.http.get<PictureDate[]>(url, {params: httpParam}).pipe(
       map(p => {
