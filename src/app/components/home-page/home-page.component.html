@@ -1,16 +1,20 @@
 <div class="container">
-  <button (click)="log()">log</button>
+  <!--<button (click)="log()">log</button>-->
   <div class="header">
-    <button mat-raised-button color="primary">Filters</button>
-    <h1>Internet shop wallpapers</h1>
+    <!--<button mat-raised-button color="primary">Filters</button>-->
+    <div class="four">
+      <h1>Internet shop wallpapers</h1>
+    </div>
     <button class="cart" routerLink="/cart" mat-fab color="primary">
       <mat-icon>delete</mat-icon>
       <span *ngIf="checkedItemBay.length > 0" matBadgeColor="accent" matBadge="{{checkedItemBay.length}}" matBadgeOverlap="false"></span>
     </button>
   </div>
-  <app-search-form></app-search-form>
   <div class="wrapper">
-    <div class="parameters"></div>
+    <div class="parameters">
+      <app-search-form></app-search-form>
+      <app-filters></app-filters>
+    </div>
     <div class="bayItem"
          infiniteScroll
          [infiniteScrollDistance]="2"

@@ -10,6 +10,7 @@ import {MaterialModule} from './material.module';
 import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.component';
 import { SearchFormComponent } from './components/search-form/search-form.component';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { FiltersComponent } from './components/filters/filters.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
     HomePageComponent,
     ShoppingCartComponent,
     SearchFormComponent,
+    FiltersComponent,
   ],
   imports: [
     BrowserModule,

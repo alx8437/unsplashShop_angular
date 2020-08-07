@@ -7,6 +7,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import {CdkScrollableModule} from '@angular/cdk/scrolling';
 import {ScrollingModule} from '@angular/cdk/scrolling';
+import {MatSelectModule} from '@angular/material/select';
 
 
 
@@ -20,6 +21,7 @@ import {ScrollingModule} from '@angular/cdk/scrolling';
     MatInputModule,
     CdkScrollableModule,
     ScrollingModule,
+    MatSelectModule,
   ],
   exports: [
     MatCheckboxModule,
@@ -30,6 +32,7 @@ import {ScrollingModule} from '@angular/cdk/scrolling';
     MatInputModule,
     CdkScrollableModule,
     ScrollingModule,
+    MatSelectModule,
   ]
 })
 
