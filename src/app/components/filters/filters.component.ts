@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, Output} from '@angular/core';
+import {FiltersService} from '../../services/filters.service';
 
 @Component({
   selector: 'app-filters',
@@ -6,35 +7,22 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./filters.component.scss']
 })
 export class FiltersComponent implements OnInit {
+
+  // @Output() selectedColor = new EventEmitter();
+
   selectedColor: string;
   selectOrientation: string;
 
-  colors = [
-    {value: '', viewValue: 'Non select'},
-    {value: 'black_and_white', viewValue: 'Black and white'},
-    {value: 'black', viewValue: 'Black'},
-    {value: 'white', viewValue: 'White'},
-    {value: 'yellow', viewValue: 'Yellow'},
-    {value: 'orange', viewValue: 'Orange'},
-    {value: 'red', viewValue: 'Red'},
-    {value: 'purple', viewValue: 'Purple'},
-    {value: 'magenta', viewValue: 'Magenta'},
-    {value: 'green', viewValue: 'Green'},
-    {value: 'teal', viewValue: 'Teal'},
-    {value: 'blue', viewValue: 'Blue'},
-  ];
+  colors = this.filterService.colors;
+  orientations = this.filterService.orientations;
 
-  orientations = [
-    {value: '', viewValue: 'Non select'},
-    {value: 'landscape', viewValue: 'Landscape'},
-    {value: 'portrait', viewValue: 'Portrait'},
-    {value: 'squarish', viewValue: 'Squarish'},
-  ];
-
-
-  constructor() { }
+  constructor(private filterService: FiltersService) { }
 
   ngOnInit(): void {
+  }
+
+  changeSelect(): void {
+    alert(this.selectedColor);
   }
 
 }

@@ -22,3 +22,14 @@ export interface GetSearch {
   total_pages: number;
   total: number;
 }
+
+export interface ColorFilter {
+  value: string;
+  viewValue: string;
+}
+
+export interface OrientationFilter {
+  value: string;
+  viewValue: string;
+
+}

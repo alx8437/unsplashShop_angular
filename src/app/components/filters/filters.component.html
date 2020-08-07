@@ -1,12 +1,13 @@
 <div class="filterItem">
   <mat-form-field appearance="fill">
     <mat-label>Select color</mat-label>
-    <mat-select [(ngModel)]="selectedColor" name="food">
+    <mat-select [(ngModel)]="selectedColor" (change)="changeSelect()" name="food">
       <mat-option *ngFor="let color of colors" [value]="color.value">
         {{color.viewValue}}
       </mat-option>
     </mat-select>
   </mat-form-field>
+  <p>{{selectedColor}}</p>
 </div>
 
 <div class="filterItem">

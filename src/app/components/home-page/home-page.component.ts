@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {PictureService} from '../../services/picture.service';
 import {PictureDate} from '../../interfaces/Interfaces';
 import {SearchService} from '../../services/search.service';
+import {FiltersService} from '../../services/filters.service';
 
 
 @Component({
@@ -17,7 +18,8 @@ export class HomePageComponent implements OnInit {
 
   constructor(
     private pictureService: PictureService,
-    private searchService: SearchService
+    private searchService: SearchService,
+    private filterService: FiltersService
   ) {
   }
 
@@ -26,19 +28,17 @@ export class HomePageComponent implements OnInit {
     this.setValue();
     this.searchService.searchQuery$
       .subscribe(data => {
-        if (data !== '') {
-          this.pictureService.paramList.query = data;
-          this.pictureService.httpParam = this.pictureService.httpParam.set('query', data);
-          console.log(this.pictureService.httpParam);
-          this.pictureService.getPhotoSearch()
-            .subscribe(p => {
-              if (p.length !== 0) {
-                this.picture = p;
-              } else if (p.length === 0) {
-                this.setValue();
-              }
-            });
-        }
+        this.pictureService.paramList.query = data;
+        this.pictureService.httpParam = this.pictureService.httpParam.set('query', data);
+        console.log(this.pictureService.httpParam);
+        this.pictureService.getPhotoSearch()
+          .subscribe(p => {
+            if (p.length !== 0) {
+              this.picture = p;
+            } else if (p.length === 0) {
+              this.setValue();
+            }
+          });
       });
   }
 
@@ -66,7 +66,7 @@ export class HomePageComponent implements OnInit {
 
 
   log(): void {
-    console.log(this.pictureService.paramList);
+    // console.log(this.filterService.selectItem);
   }
 
   restoreLocalStorage(): void {
@@ -93,7 +93,7 @@ export class HomePageComponent implements OnInit {
     this.pictureService.paramList.page += 1;
     console.log(this.pictureService.paramList.page);
     if (this.pictureService.paramList.query !== '') {
-      this.pictureService.httpParam = this.pictureService.httpParam.set('page', this.pictureService.paramList.page.toString())
+      this.pictureService.httpParam = this.pictureService.httpParam.set('page', this.pictureService.paramList.page.toString());
       console.log(this.pictureService.httpParam);
       this.pictureService.getPhotoSearch()
         .subscribe(p => {
@@ -107,8 +107,8 @@ export class HomePageComponent implements OnInit {
           this.picture.push(...p);
         });
     }
-
   }
+
 
 }
 

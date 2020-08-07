@@ -34,7 +34,8 @@ export class SearchFormComponent implements OnInit {
       console.log(data);
       this.searchService.setSearch(data);
     });
-
   }
+
+
 
 }
