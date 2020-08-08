@@ -40,6 +40,12 @@ export class HomePageComponent implements OnInit {
             }
           });
       });
+    this.filterService.selectedColor$
+      .subscribe(data => {
+        console.log(data);
+      });
+    console.log(this.filterService.selectedColor$);
+    console.log(this.searchService.searchQuery$);
   }
 
   setValue(): void {

@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import { Subject, Observable} from 'rxjs';
+import {Subject} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +12,4 @@ export class SearchService {
   constructor() {
   }
 
-  setSearch(query): void {
-    this.searchQuery$.next(query);
-  }
 }

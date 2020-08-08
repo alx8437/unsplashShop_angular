@@ -31,8 +31,7 @@ export class SearchFormComponent implements OnInit {
       distinctUntilChanged(),
     ).subscribe(data => {
       this.pictureService.paramList.query = data;
-      console.log(data);
-      this.searchService.setSearch(data);
+      this.searchService.searchQuery$.next(data);
     });
   }
 

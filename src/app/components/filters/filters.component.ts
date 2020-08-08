@@ -1,5 +1,7 @@
 import {Component, OnInit, Output} from '@angular/core';
 import {FiltersService} from '../../services/filters.service';
+import {FormControl} from '@angular/forms';
+import {debounceTime, distinctUntilChanged} from 'rxjs/operators';
 
 @Component({
   selector: 'app-filters',
@@ -8,21 +10,28 @@ import {FiltersService} from '../../services/filters.service';
 })
 export class FiltersComponent implements OnInit {
 
-  // @Output() selectedColor = new EventEmitter();
+  selectedColor: FormControl = new FormControl('');
 
-  selectedColor: string;
+
   selectOrientation: string;
 
   colors = this.filterService.colors;
   orientations = this.filterService.orientations;
 
-  constructor(private filterService: FiltersService) { }
-
-  ngOnInit(): void {
+  constructor(private filterService: FiltersService) {
   }
 
-  changeSelect(): void {
-    alert(this.selectedColor);
+  ngOnInit(): void {
+    this.getSelectColor();
+  }
+
+  getSelectColor(): void {
+    this.selectedColor.valueChanges.pipe(
+      debounceTime(500),
+      distinctUntilChanged(),
+    ).subscribe(data => {
+      this.filterService.selectedColor$.next(data);
+    });
   }
 
 }

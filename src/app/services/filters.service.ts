@@ -1,10 +1,13 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {ColorFilter, OrientationFilter} from '../interfaces/Interfaces';
+import { Subject} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FiltersService {
+
+  selectedColor$: Subject<string> = new Subject();
 
   colors: ColorFilter[] = [
     {value: '', viewValue: 'Select color'},
@@ -29,5 +32,10 @@ export class FiltersService {
   ];
 
 
-  constructor() { }
+  constructor() {
+  }
 }
+
+
+
+
