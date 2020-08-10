@@ -15,12 +15,14 @@ export class PictureService {
     page: 1,
     per_page: 9,
     query: '',
+    color: '',
+    orientation: ''
   };
 
   httpParam = new HttpParams()
     .set('client_id', 'k_uAJlDjzQOJ1wE47nT83aMH6z-tj0_JsoTt9jzVbZI')
     .set('page', this.paramList.page.toString())
-    .set('per_page', this.paramList.per_page.toString())
+    .set('per_page', this.paramList.per_page.toString());
 
   constructor(
     private http: HttpClient,
@@ -32,7 +34,6 @@ export class PictureService {
       .set('client_id', 'k_uAJlDjzQOJ1wE47nT83aMH6z-tj0_JsoTt9jzVbZI')
       .set('page', this.paramList.page.toString())
       .set('per_page', this.paramList.per_page.toString());
-    console.log(httpParam)
     const url = `${environment.apiUrl}/photos`;
     return this.http.get<PictureDate[]>(url, {params: httpParam}).pipe(
       map(p => {
@@ -53,7 +54,6 @@ export class PictureService {
     const url = `${environment.apiUrl}/search/photos`;
     return this.http.get<GetSearch>(url, {params: this.httpParam}).pipe(
       map(p => {
-        console.log(p)
         return p.results.map(picture => {
           return {
             id: picture.id,

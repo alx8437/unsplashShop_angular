@@ -14,7 +14,9 @@ export interface PictureDate {
 export interface ParamListPictures {
   page: number;
   per_page: number;
-  query: string;
+  query?: string;
+  color?: string;
+  orientation?: string;
 }
 
 export interface GetSearch {

@@ -26,28 +26,9 @@ export class HomePageComponent implements OnInit {
   ngOnInit(): void {
     this.restoreLocalStorage();
     this.setValue();
-    this.searchService.searchQuery$
-      .subscribe(data => {
-        this.pictureService.paramList.query = data;
-        this.pictureService.httpParam = this.pictureService.httpParam.set('query', data);
-        console.log(this.pictureService.httpParam);
-        this.pictureService.getPhotoSearch()
-          .subscribe(p => {
-            if (p.length !== 0) {
-              this.picture = p;
-            } else if (p.length === 0) {
-              this.setValue();
-            }
-          });
-      });
-    this.filterService.selectedColor$
-      .subscribe(color => {
-        console.log(color);
-      });
-    this.filterService.selectedOrientation$
-      .subscribe(orient => {
-        console.log(orient);
-      });
+    this.sentSearch();
+    this.setColorFilter();
+    this.setOrientationFilter();
   }
 
   setValue(): void {
@@ -74,7 +55,7 @@ export class HomePageComponent implements OnInit {
 
 
   log(): void {
-    // console.log(this.filterService.selectItem);
+    console.log(this.pictureService.httpParam);
   }
 
   restoreLocalStorage(): void {
@@ -99,15 +80,11 @@ export class HomePageComponent implements OnInit {
 
   onScroll(): void {
     this.pictureService.paramList.page += 1;
-    console.log(this.pictureService.paramList.page);
     if (this.pictureService.paramList.query !== '') {
       this.pictureService.httpParam = this.pictureService.httpParam.set('page', this.pictureService.paramList.page.toString());
-      console.log(this.pictureService.httpParam);
       this.pictureService.getPhotoSearch()
         .subscribe(p => {
-          console.log(p);
           this.picture.push(...p);
-          console.log(this.picture);
         });
     } else {
       this.pictureService.getPhotosList()
@@ -115,6 +92,50 @@ export class HomePageComponent implements OnInit {
           this.picture.push(...p);
         });
     }
+  }
+
+  getPhotoSearch(): void {
+    this.pictureService.getPhotoSearch()
+      .subscribe(p => {
+        if (p.length !== 0) {
+          this.picture = p;
+        } else if (p.length === 0) {
+          this.setValue();
+        }
+      });
+  }
+
+  sentSearch(): void {
+    this.searchService.searchQuery$
+      .subscribe(data => {
+        this.pictureService.paramList.query = data;
+        this.pictureService.httpParam = this.pictureService.httpParam.set('query', this.pictureService.paramList.query);
+        this.getPhotoSearch();
+      });
+  }
+
+  setColorFilter(): void {
+    this.filterService.selectedColor$
+      .subscribe(color => {
+        this.pictureService.paramList.color = color;
+        if (this.pictureService.paramList.color !== '') {
+          this.pictureService.httpParam = this.pictureService.httpParam.set('color', this.pictureService.paramList.color);
+          this.pictureService.getPhotoSearch()
+            .subscribe(p => {
+              this.picture = p;
+            });
+        } else {
+          this.pictureService.httpParam = this.pictureService.httpParam.delete('color');
+          this.getPhotoSearch();
+        }
+      });
+  }
+
+  setOrientationFilter(): void {
+    this.filterService.selectedOrientation$
+      .subscribe(orient => {
+        console.log(orient);
+      });
   }
 
 
