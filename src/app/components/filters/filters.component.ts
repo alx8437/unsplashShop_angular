@@ -1,7 +1,8 @@
 import {Component, OnInit, Output} from '@angular/core';
 import {FiltersService} from '../../services/filters.service';
-import {FormControl} from '@angular/forms';
+import {FormControl, FormGroup} from '@angular/forms';
 import {debounceTime, distinctUntilChanged} from 'rxjs/operators';
+import {SearchService} from '../../services/search.service';
 
 @Component({
   selector: 'app-filters',
@@ -10,18 +11,22 @@ import {debounceTime, distinctUntilChanged} from 'rxjs/operators';
 })
 export class FiltersComponent implements OnInit {
 
-  selectedColor: FormControl = new FormControl('');
-  selectOrientation: FormControl = new FormControl('');
+  selectedColor: FormControl = new FormControl({value: '', disabled: true});
+  selectOrientation: FormControl = new FormControl({value: '', disabled: true});
 
   colors = this.filterService.colors;
   orientations = this.filterService.orientations;
 
-  constructor(private filterService: FiltersService) {
+  constructor(
+    private filterService: FiltersService,
+    private searchService: SearchService,
+  ) {
   }
 
   ngOnInit(): void {
     this.setSelectColor();
     this.setSelectOrientation();
+    this.activeSelect();
   }
 
   setSelectColor(): void {
@@ -40,6 +45,15 @@ export class FiltersComponent implements OnInit {
     ).subscribe(data => {
       this.filterService.selectedOrientation$.next(data);
     });
+  }
+
+  activeSelect(): void {
+    this.searchService.searchQuery$
+      .subscribe(value => {
+        (value !== '') ?  this.selectedColor.enable() : this.selectedColor.disable();
+        (value !== '') ?  this.selectOrientation.enable() : this.selectOrientation.disable();
+      });
+
   }
 
 

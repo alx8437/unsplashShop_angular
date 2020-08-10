@@ -62,6 +62,7 @@ export class HomePageComponent implements OnInit {
     const stateAsString = localStorage.getItem('itemForBay');
     if (stateAsString !== null) {
       this.localStorage = JSON.parse(stateAsString);
+      console.log(this.localStorage);
     }
   }
 
