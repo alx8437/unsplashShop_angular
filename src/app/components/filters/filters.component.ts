@@ -11,9 +11,7 @@ import {debounceTime, distinctUntilChanged} from 'rxjs/operators';
 export class FiltersComponent implements OnInit {
 
   selectedColor: FormControl = new FormControl('');
-
-
-  selectOrientation: string;
+  selectOrientation: FormControl = new FormControl('');
 
   colors = this.filterService.colors;
   orientations = this.filterService.orientations;
@@ -22,10 +20,11 @@ export class FiltersComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getSelectColor();
+    this.setSelectColor();
+    this.setSelectOrientation();
   }
 
-  getSelectColor(): void {
+  setSelectColor(): void {
     this.selectedColor.valueChanges.pipe(
       debounceTime(500),
       distinctUntilChanged(),
@@ -33,5 +32,15 @@ export class FiltersComponent implements OnInit {
       this.filterService.selectedColor$.next(data);
     });
   }
+
+  setSelectOrientation(): void {
+    this.selectOrientation.valueChanges.pipe(
+      debounceTime(500),
+      distinctUntilChanged()
+    ).subscribe(data => {
+      this.filterService.selectedOrientation$.next(data);
+    });
+  }
+
 
 }

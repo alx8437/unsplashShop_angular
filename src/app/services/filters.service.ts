@@ -8,6 +8,7 @@ import { Subject} from 'rxjs';
 export class FiltersService {
 
   selectedColor$: Subject<string> = new Subject();
+  selectedOrientation$: Subject<string> = new Subject();
 
   colors: ColorFilter[] = [
     {value: '', viewValue: 'Select color'},

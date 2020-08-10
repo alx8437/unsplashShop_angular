@@ -8,7 +8,6 @@ export class SearchService {
 
   searchQuery$: Subject<string> = new Subject();
 
-
   constructor() {
   }
 

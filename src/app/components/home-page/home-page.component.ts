@@ -41,11 +41,13 @@ export class HomePageComponent implements OnInit {
           });
       });
     this.filterService.selectedColor$
-      .subscribe(data => {
-        console.log(data);
+      .subscribe(color => {
+        console.log(color);
       });
-    console.log(this.filterService.selectedColor$);
-    console.log(this.searchService.searchQuery$);
+    this.filterService.selectedOrientation$
+      .subscribe(orient => {
+        console.log(orient);
+      });
   }
 
   setValue(): void {

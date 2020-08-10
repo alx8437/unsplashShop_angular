@@ -13,7 +13,7 @@
 <div class="filterItem">
   <mat-form-field appearance="fill">
     <mat-label>Select orientation</mat-label>
-    <mat-select [(ngModel)]="selectOrientation" name="orientation">
+    <mat-select [formControl]="selectOrientation" name="orientation">
       <mat-option *ngFor="let orientation of orientations" [value]="orientation.value">
         {{orientation.viewValue}}
       </mat-option>
