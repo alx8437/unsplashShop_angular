@@ -41,8 +41,10 @@ export class HomePageComponent implements OnInit {
       this.pictureService.getPhotosList()
         .subscribe((picture: PictureDate[]) => {
           this.localGet = picture;
+          console.log(this.localGet);
           for (const el of this.localStorage) {
             const index = this.localGet.findIndex(item => item.id === el.id);
+            debugger
             this.localGet[index].isChecked = true;
             this.picture = this.localGet;
             this.checkedItemBay = this.localGet.filter(x => {
@@ -55,7 +57,6 @@ export class HomePageComponent implements OnInit {
 
 
   log(): void {
-    console.log(this.pictureService.httpParam);
   }
 
   restoreLocalStorage(): void {
