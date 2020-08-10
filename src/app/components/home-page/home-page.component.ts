@@ -107,8 +107,8 @@ export class HomePageComponent implements OnInit {
 
   sentSearch(): void {
     this.searchService.searchQuery$
-      .subscribe(data => {
-        this.pictureService.paramList.query = data;
+      .subscribe(query => {
+        this.pictureService.paramList.query = query;
         this.pictureService.httpParam = this.pictureService.httpParam.set('query', this.pictureService.paramList.query);
         this.getPhotoSearch();
       });
@@ -120,10 +120,7 @@ export class HomePageComponent implements OnInit {
         this.pictureService.paramList.color = color;
         if (this.pictureService.paramList.color !== '') {
           this.pictureService.httpParam = this.pictureService.httpParam.set('color', this.pictureService.paramList.color);
-          this.pictureService.getPhotoSearch()
-            .subscribe(p => {
-              this.picture = p;
-            });
+          this.getPhotoSearch();
         } else {
           this.pictureService.httpParam = this.pictureService.httpParam.delete('color');
           this.getPhotoSearch();
@@ -134,7 +131,14 @@ export class HomePageComponent implements OnInit {
   setOrientationFilter(): void {
     this.filterService.selectedOrientation$
       .subscribe(orient => {
-        console.log(orient);
+        this.pictureService.paramList.orientation = orient;
+        if (this.pictureService.paramList.orientation !== '') {
+          this.pictureService.httpParam = this.pictureService.httpParam.set('orientation', this.pictureService.paramList.orientation);
+          this.getPhotoSearch();
+        } else {
+          this.pictureService.httpParam = this.pictureService.httpParam.delete('orientation');
+          this.getPhotoSearch();
+        }
       });
   }
 
