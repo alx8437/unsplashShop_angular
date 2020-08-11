@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {PictureDate, Preloader} from '../../interfaces/Interfaces';
 import {FormControl} from '@angular/forms';
 import {debounceTime, distinctUntilChanged} from 'rxjs/operators';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-shopping-cart',
@@ -22,7 +23,7 @@ export class ShoppingCartComponent implements OnInit {
   };
   successBuy;
 
-  constructor() {
+  constructor(private router: Router) {
   }
 
   restoreLocalStorage = () => {
@@ -70,12 +71,13 @@ export class ShoppingCartComponent implements OnInit {
     this.preloader.status = true;
     this.randomSuccessBuy();
     console.log(this.successBuy);
-    // setTimeout(() => {
-    //   this.preloader.status = false;
-    //   localStorage.clear();
-    //   this.restoreLocalStorage();
-    //   this.sumAllItems = 0;
-    // }, 1500);
+    setTimeout(() => {
+      // this.preloader.status = false;
+      // localStorage.clear();
+      // this.restoreLocalStorage();
+      // this.sumAllItems = 0;
+      this.router.navigate(['']);
+    }, 1500);
   }
 
   saveLocalStorage(): void {
