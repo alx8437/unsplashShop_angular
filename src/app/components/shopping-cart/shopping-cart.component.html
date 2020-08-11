@@ -1,5 +1,13 @@
 <div class="container">
   <button (click)="log()">log</button>
+  <div *ngIf="preloader.status" class="preloader">
+    <mat-progress-spinner
+      class="example-margin"
+      [color]="preloader.color"
+      [mode]="preloader.mode"
+      [value]="preloader.value">
+    </mat-progress-spinner>
+  </div>
   <div class="wrapper">
     <div class="items">
       <div class="bayItem">
@@ -8,6 +16,14 @@
             <div class="price">
               <p>{{itemBay.width | currency:'USD':'symbol-narrow':'1.0-0'}}</p>
             </div>
+            <button
+              mat-button
+              color="warn"
+              class="deleteItem"
+              (click)="deleteItem(itemBay.id)"
+              >
+              <mat-icon>delete</mat-icon>
+            </button>
             <img src={{itemBay.urls.small}} alt="#">
           </div>
         </div>
@@ -18,7 +34,7 @@
         <div class="subtotal_wrapper">
           <p class="descr">Subtotal ({{shopItemsBay.length}} items )</p>
           <p class="sumItems">{{sumAllItems | currency:'USD':'symbol-narrow':'1.0-0'}}</p>
-          <button class="buyButton" mat-raised-button color="accent">Proceed to buy</button>
+          <button class="buyButton" mat-raised-button color="accent" (click)="bayPicture()">Proceed to buy</button>
         </div>
       </div>
       <div class="promoWrapper">

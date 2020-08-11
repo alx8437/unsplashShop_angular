@@ -1,3 +1,6 @@
+import {ThemePalette} from '@angular/material/core';
+import {ProgressSpinnerMode} from '@angular/material/progress-spinner';
+
 interface Urls {
   small: string;
   regular: string;
@@ -33,5 +36,13 @@ export interface ColorFilter {
 export interface OrientationFilter {
   value: string;
   viewValue: string;
+
+}
+
+export interface Preloader {
+  status: boolean;
+  color: ThemePalette;
+  mode: ProgressSpinnerMode;
+  value: number;
 
 }

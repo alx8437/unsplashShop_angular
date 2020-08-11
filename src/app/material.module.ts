@@ -8,6 +8,7 @@ import { MatInputModule } from '@angular/material/input';
 import {CdkScrollableModule} from '@angular/cdk/scrolling';
 import {ScrollingModule} from '@angular/cdk/scrolling';
 import {MatSelectModule} from '@angular/material/select';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 
 
@@ -22,6 +23,7 @@ import {MatSelectModule} from '@angular/material/select';
     CdkScrollableModule,
     ScrollingModule,
     MatSelectModule,
+    MatProgressSpinnerModule,
   ],
   exports: [
     MatCheckboxModule,
@@ -33,6 +35,7 @@ import {MatSelectModule} from '@angular/material/select';
     CdkScrollableModule,
     ScrollingModule,
     MatSelectModule,
+    MatProgressSpinnerModule,
   ]
 })
 

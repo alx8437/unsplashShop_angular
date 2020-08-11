@@ -41,7 +41,6 @@ export class HomePageComponent implements OnInit {
       this.pictureService.getPhotosList()
         .subscribe((picture: PictureDate[]) => {
           this.localGet = picture;
-          console.log(this.localGet);
           for (const el of this.localStorage) {
             const index = this.localGet.findIndex(item => item.id === el.id);
             this.localGet[index].isChecked = true;
@@ -62,7 +61,6 @@ export class HomePageComponent implements OnInit {
     const stateAsString = localStorage.getItem('itemForBay');
     if (stateAsString !== null) {
       this.localStorage = JSON.parse(stateAsString);
-      console.log(this.localStorage);
     }
   }
 
@@ -142,6 +140,8 @@ export class HomePageComponent implements OnInit {
         }
       });
   }
+
+
 
 
 }

@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {PictureDate} from '../../interfaces/Interfaces';
+import {PictureDate, Preloader} from '../../interfaces/Interfaces';
 import {FormControl} from '@angular/forms';
 import {debounceTime, distinctUntilChanged} from 'rxjs/operators';
 
@@ -14,6 +14,12 @@ export class ShoppingCartComponent implements OnInit {
   sumAllItems = 0;
   promocodeValue;
   promocode: FormControl = new FormControl({value: '', disabled: false});
+  preloader: Preloader = {
+    status: false,
+    color: 'accent',
+    mode: 'indeterminate',
+    value: 50
+  };
 
   constructor() {
   }
@@ -22,6 +28,8 @@ export class ShoppingCartComponent implements OnInit {
     const stateAsString = localStorage.getItem('itemForBay');
     if (stateAsString !== null) {
       this.shopItemsBay = JSON.parse(stateAsString);
+    } else {
+      this.shopItemsBay = [];
     }
   };
 
@@ -57,9 +65,35 @@ export class ShoppingCartComponent implements OnInit {
     this.setSumItems();
   }
 
+  bayPicture(): void {
+    this.preloader.status = true;
+    setTimeout(() => {
+      this.preloader.status = false;
+      localStorage.clear();
+      this.restoreLocalStorage();
+      this.sumAllItems = 0;
+    }, 2000);
+  }
+
+  saveLocalStorage(): void {
+    const stateAsString = JSON.stringify(this.shopItemsBay);
+    localStorage.setItem('itemForBay', stateAsString);
+  }
+
+  deleteItem(id): void {
+    this.shopItemsBay = this.shopItemsBay.filter(item => {
+      return item.id !== id;
+    });
+    this.saveLocalStorage();
+    this.sumAllItems = 0;
+    this.setSumItems();
+  }
+
 
   log(): void {
-    console.log(this.promocodeValue);
+    // this.shopItemsBay.filter(item => {
+    //   console.log(item);
+    // });
   }
 
 }
