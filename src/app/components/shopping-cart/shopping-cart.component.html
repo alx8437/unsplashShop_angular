@@ -9,7 +9,7 @@
     </mat-progress-spinner>
   </div>
   <div class="wrapper">
-    <div class="items">
+    <div class="items" *ngIf="shopItemsBay.length !== 0; else empty">
       <div class="bayItem">
         <div class="picture" *ngFor="let itemBay of shopItemsBay">
           <div class="picture__container">
@@ -29,6 +29,11 @@
         </div>
       </div>
     </div>
+    <ng-template #empty>
+      <div  class="empty">
+        <p>Your cart is empty</p>
+      </div>
+    </ng-template>
     <div class="buyBlock">
       <div class="subtotal">
         <div class="subtotal_wrapper">
