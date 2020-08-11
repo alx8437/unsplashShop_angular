@@ -44,7 +44,6 @@ export class HomePageComponent implements OnInit {
           console.log(this.localGet);
           for (const el of this.localStorage) {
             const index = this.localGet.findIndex(item => item.id === el.id);
-            debugger
             this.localGet[index].isChecked = true;
             this.picture = this.localGet;
             this.checkedItemBay = this.localGet.filter(x => {

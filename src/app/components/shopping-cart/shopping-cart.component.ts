@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {PictureDate} from '../../interfaces/Interfaces';
+import {FormControl} from '@angular/forms';
+import {debounceTime, distinctUntilChanged} from 'rxjs/operators';
 
 @Component({
   selector: 'app-shopping-cart',
@@ -9,6 +11,9 @@ import {PictureDate} from '../../interfaces/Interfaces';
 export class ShoppingCartComponent implements OnInit {
 
   shopItemsBay: PictureDate[] = [];
+  sumAllItems = 0;
+  promocodeValue;
+  promocode: FormControl = new FormControl({value: '', disabled: false});
 
   constructor() {
   }
@@ -18,18 +23,43 @@ export class ShoppingCartComponent implements OnInit {
     if (stateAsString !== null) {
       this.shopItemsBay = JSON.parse(stateAsString);
     }
-    }
+  };
 
   ngOnInit(): void {
     this.restoreLocalStorage();
+    this.setSumItems();
+    this.setPromocodeValue();
   }
 
 
+  setSumItems(): void {
+    this.shopItemsBay.map(item => {
+      this.sumAllItems += item.width;
+    });
+  }
 
+  setPromocodeValue(): void {
+    this.promocode.valueChanges.pipe(
+      debounceTime(500),
+      distinctUntilChanged()
+    ).subscribe(data => {
+      this.promocodeValue = data;
+    });
+  }
+
+  applyPromocode(): void {
+    const discount = +this.promocodeValue.slice(5, 7);
+    this.sumAllItems = this.sumAllItems - (this.sumAllItems / 100 * discount);
+  }
+
+  clearForm(): void {
+    this.sumAllItems = 0;
+    this.setSumItems();
+  }
 
 
   log(): void {
-    console.log(this.shopItemsBay);
+    console.log(this.promocodeValue);
   }
 
 }

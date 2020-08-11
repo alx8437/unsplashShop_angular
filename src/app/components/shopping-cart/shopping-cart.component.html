@@ -1,9 +1,39 @@
 <div class="container">
   <button (click)="log()">log</button>
-  <div class="bayItem">
-    <div class="picture" *ngFor="let itemBay of shopItemsBay">
-      <div class="picture__container">
-        <img src={{itemBay.urls.small}} alt="#">
+  <div class="wrapper">
+    <div class="items">
+      <div class="bayItem">
+        <div class="picture" *ngFor="let itemBay of shopItemsBay">
+          <div class="picture__container">
+            <div class="price">
+              <p>{{itemBay.width | currency:'USD':'symbol-narrow':'1.0-0'}}</p>
+            </div>
+            <img src={{itemBay.urls.small}} alt="#">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="buyBlock">
+      <div class="subtotal">
+        <div class="subtotal_wrapper">
+          <p class="descr">Subtotal ({{shopItemsBay.length}} items )</p>
+          <p class="sumItems">{{sumAllItems | currency:'USD':'symbol-narrow':'1.0-0'}}</p>
+          <button class="buyButton" mat-raised-button color="accent">Proceed to buy</button>
+        </div>
+      </div>
+      <div class="promoWrapper">
+        <div class="promo">
+          <mat-form-field class="promocodeInput">
+            <input matInput type="text" [formControl]="promocode">
+            <button mat-button *ngIf="promocode"
+                    matSuffix mat-icon-button aria-label="Clear"
+                    (click)="promocode.setValue('')">
+              <mat-icon (click)="clearForm()">close</mat-icon>
+            </button>
+          </mat-form-field>
+          <p>Enter your promocode</p>
+        </div>
+        <button mat-raised-button color="accent" (click)="applyPromocode()">Apply</button>
       </div>
     </div>
   </div>
