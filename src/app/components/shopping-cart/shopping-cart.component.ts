@@ -20,6 +20,7 @@ export class ShoppingCartComponent implements OnInit {
     mode: 'indeterminate',
     value: 50
   };
+  successBuy;
 
   constructor() {
   }
@@ -67,12 +68,14 @@ export class ShoppingCartComponent implements OnInit {
 
   bayPicture(): void {
     this.preloader.status = true;
-    setTimeout(() => {
-      this.preloader.status = false;
-      localStorage.clear();
-      this.restoreLocalStorage();
-      this.sumAllItems = 0;
-    }, 2000);
+    this.randomSuccessBuy();
+    console.log(this.successBuy);
+    // setTimeout(() => {
+    //   this.preloader.status = false;
+    //   localStorage.clear();
+    //   this.restoreLocalStorage();
+    //   this.sumAllItems = 0;
+    // }, 1500);
   }
 
   saveLocalStorage(): void {
@@ -87,6 +90,10 @@ export class ShoppingCartComponent implements OnInit {
     this.saveLocalStorage();
     this.sumAllItems = 0;
     this.setSumItems();
+  }
+
+  randomSuccessBuy(): void {
+    this.successBuy = Math.floor(Math.random() * Math.floor(2));
   }
 
 
