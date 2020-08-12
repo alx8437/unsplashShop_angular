@@ -22,6 +22,7 @@ export class ShoppingCartComponent implements OnInit {
     value: 50
   };
   successBuy;
+  proceedBuy = false;
 
   constructor(private router: Router) {
   }
@@ -72,11 +73,15 @@ export class ShoppingCartComponent implements OnInit {
     this.randomSuccessBuy();
     console.log(this.successBuy);
     setTimeout(() => {
-      // this.preloader.status = false;
-      // localStorage.clear();
-      // this.restoreLocalStorage();
-      // this.sumAllItems = 0;
-      this.router.navigate(['']);
+      this.preloader.status = false;
+      this.randomSuccessBuy();
+      this.proceedBuy = true;
+      console.log(this.successBuy);
+      if (this.successBuy === 1) {
+        localStorage.clear();
+        this.restoreLocalStorage();
+        this.sumAllItems = 0;
+      }
     }, 1500);
   }
 

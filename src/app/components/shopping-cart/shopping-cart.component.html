@@ -1,13 +1,5 @@
 <div class="container">
-  <button (click)="log()">log</button>
-  <div *ngIf="preloader.status" class="preloader">
-    <mat-progress-spinner
-      class="example-margin"
-      [color]="preloader.color"
-      [mode]="preloader.mode"
-      [value]="preloader.value">
-    </mat-progress-spinner>
-  </div>
+  <!--<button (click)="log()">log</button>-->
   <div class="wrapper">
     <div class="items" *ngIf="shopItemsBay.length !== 0; else empty">
       <div class="bayItem">
@@ -32,6 +24,7 @@
     <ng-template #empty>
       <div  class="empty">
         <p>Your cart is empty</p>
+        <button mat-raised-button color="primary" (click)="router.navigate([''])">Back to store</button>
       </div>
     </ng-template>
     <div class="buyBlock">
@@ -39,7 +32,12 @@
         <div class="subtotal_wrapper">
           <p class="descr">Subtotal ({{shopItemsBay.length}} items )</p>
           <p class="sumItems">{{sumAllItems | currency:'USD':'symbol-narrow':'1.0-0'}}</p>
-          <button class="buyButton" mat-raised-button color="accent" (click)="bayPicture()">Proceed to buy</button>
+          <button
+            class="buyButton"
+            mat-raised-button color="accent"
+            (click)="bayPicture()"
+            [disabled]="shopItemsBay.length === 0"
+          >Proceed to buy</button>
         </div>
       </div>
       <div class="promoWrapper">
@@ -56,6 +54,28 @@
         </div>
         <button mat-raised-button color="accent" (click)="applyPromocode()">Apply</button>
       </div>
+
     </div>
+    <div *ngIf="proceedBuy" class="proceedBuy">
+      <div *ngIf="successBuy === 1; else unSuccess" class="successBuy">
+        <p>Your order has been successfully completed</p>
+        <button mat-raised-button color="accent" (click)="router.navigate([''])">ok</button>
+      </div>
+      <ng-template  #unSuccess>
+        <div class="unSuccessBuy">
+          <p>Your payment is not success</p>
+          <p>Please try again</p>
+          <button mat-raised-button color="accent" (click)="proceedBuy = false">ok</button>
+        </div>
+      </ng-template>
+    </div>
+  </div>
+  <div *ngIf="preloader.status" class="preloader">
+    <mat-progress-spinner
+      class="example-margin"
+      [color]="preloader.color"
+      [mode]="preloader.mode"
+      [value]="preloader.value">
+    </mat-progress-spinner>
   </div>
 </div>

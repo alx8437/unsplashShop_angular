@@ -2,6 +2,7 @@
   margin-top: 20px;
   display: flex;
   justify-content: space-between;
+  position: relative;
 }
 
 .bayItem {
@@ -25,7 +26,7 @@
   }
 
   &__container {
-    margin: 0 0 5px 5px;
+    margin: 0 0 5px 2px;
     width: 290px;
     height: 300px;
     position: relative;
@@ -127,9 +128,60 @@
 }
 
 .empty {
-  margin: 0 auto;
+  margin-right: 670px;
   p {
     font-size: 25px;
+  }
+  button {
+    //margin: 30px 100px;
+  }
+}
+
+.successBuy {
+  width: 400px;
+  height: 200px;
+  left: 400px;
+  top: 200px;
+  position: absolute;
+  background-color: #673ab7;
+  border-radius: 5px;
+  opacity: 0.9;
+  p {
+    text-align: center;
+    margin-top: 50px;
+    font-size: 17px;
+    color: white;
+  }
+  button {
+    margin: 20px 0 20px 160px;
+  }
+}
+
+.unSuccessBuy {
+  width: 400px;
+  height: 200px;
+  left: 400px;
+  top: 200px;
+  position: absolute;
+  background-color: #673ab7;
+  border-radius: 5px;
+  opacity: 0.9;
+  p {
+    text-align: center;
+    margin-top: 30px;
+    font-size: 16px;
+    color: white;
+  }
+  button {
+    margin: 20px 0 20px 160px;
+  }
+}
+
+.preloader {
+  .example-margin {
+    position: absolute;
+    top: 200px;
+    right: 550px;
   }
 }
 
